@@ -1,0 +1,104 @@
+$grey: #555;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #333;
+}
+
+.menu {
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    height: 70px;
+    margin: 20px auto;
+    list-style-type: none;
+    text-align: center;
+    &.active {
+        .toggle-btn {
+            span {
+                &:nth-child(1) {
+                    top: 50%;
+                    transform: rotate(45deg) translate(-5%, -50%);
+                }
+                &:nth-child(2) {
+                    transform: translateX(200px);
+                    opacity: 0;
+                }
+                &:nth-child(3) {
+                    top: 50%;
+                    transform: rotate(-45deg) translate(0%, -50%);
+                }
+            }
+        }
+        .menu-list {
+            width: 100%;
+            ul {
+                li {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .toggle-btn {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+        background: #fff;
+        span {
+            position: absolute;
+            left: 50%;
+            display: block;
+            width: 30px;
+            height: 2px;
+            margin-left: -15px;
+            transition: top .3s ease, transform .3s ease, opacity .2s ease .1s;
+            background: $grey;
+            &:nth-child(1) {
+                top: 40%;
+                transform-origin: center left;
+            }
+            &:nth-child(2) {
+                top: 50%;
+            }
+            &:nth-child(3) {
+                top: 60%;
+                transform-origin: center left;
+            }
+        }
+    }
+    .menu-list {
+        width: 0;
+        transition: width .4s ease;
+        background: #fff;
+        ul {
+            li {
+                font-size: 13px;
+                line-height: 70px;
+                position: relative;
+                display: inline-block;
+                padding: 0 30px;
+                transition: opacity .2s ease;
+                opacity: 0;
+                @for $i from 1 through 5 {
+                    &:nth-child(#{$i}) {
+                        transition-delay: .05s * $i + .05s;
+                    }
+                }
+                &:before {
+                    content: '';
+                    background: $grey;
+                }
+                &:after {
+                    content: '';
+                    background: $grey;
+                }
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
